@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ForsythBarr.Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8137ec9d31c87f7b900e36bc393a28dba2d29be8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f093c45a2793a54e5e34ee5062e41a78dd63406e")]
 [assembly: System.Reflection.AssemblyProductAttribute("ForsythBarr.Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ForsythBarr.Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
