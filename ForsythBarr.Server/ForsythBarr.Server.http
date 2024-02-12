@@ -1,0 +1,6 @@
+@ForsythBarr.Server_HostAddress = http://localhost:5095
+
+GET {{ForsythBarr.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
