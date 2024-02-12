@@ -1,0 +1,4 @@
+interface IEventNotification
+{
+    void SendNotification();
+}
