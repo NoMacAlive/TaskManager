@@ -1,12 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "uSj4c2oUs6dNCKLrINLohJAXSAO2wQeQuswi6GPmTLX6c1SI+msx4nM7+y6SHYZ/kBywMmW7emkB61RtzqIa8A==",
+  "dgSpecHash": "zVygIcpFRqXaDQu3ZYerpcrK8ZhLYNycy8rM1n/u+r5WFDRExT5DnzEOy1dzcEcK+Bf+NuIvT8RsE0L2w9+60Q==",
   "success": true,
   "projectFilePath": "D:\\GitHubRepos\\guangnya-technical-exercise\\ForsythBarr.Server\\ForsythBarr.Server.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\zhugu\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\zhugu\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
     "C:\\Users\\zhugu\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\zhugu\\.nuget\\packages\\mediatr\\12.2.0\\mediatr.12.2.0.nupkg.sha512",
+    "C:\\Users\\zhugu\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
     "C:\\Users\\zhugu\\.nuget\\packages\\microsoft.aspnetcore.spaproxy\\8.0.1\\microsoft.aspnetcore.spaproxy.8.0.1.nupkg.sha512",
     "C:\\Users\\zhugu\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
     "C:\\Users\\zhugu\\.nuget\\packages\\microsoft.codeanalysis.analyzers\\3.3.3\\microsoft.codeanalysis.analyzers.3.3.3.nupkg.sha512",

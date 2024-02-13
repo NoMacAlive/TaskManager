@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Task = ForsythBarr.Server.Domain.Task;
+using Task = ForsythBarr.Server.Domain.Models.Task;
 
 namespace ForsythBarr.Server.Infrastructure;
 
