@@ -1,9 +1,11 @@
-﻿using Task = ForsythBarr.Server.Domain.Models.Task;
+﻿using ForsythBarr.Server.Infrastructure.EventHandlers;
+using Task = ForsythBarr.Server.Domain.Models.Task;
 using ForsythBarr.Server.Infrastructure.Repositories;
+using MediatR;
 
 namespace ForsythBarr.Server.Infrastructure.Services;
 
-public class TaskService(ITaskRepository taskRepository) : ITaskService
+public class TaskService(ITaskRepository taskRepository, IMediator mediator) : ITaskService
 {
     public IEnumerable<Task> GetAllTasks()
     {
@@ -20,9 +22,14 @@ public class TaskService(ITaskRepository taskRepository) : ITaskService
         return task;
     }
 
-    public void AddTask(Task task)
+    public async System.Threading.Tasks.Task AddTask(Task task)
     {
         taskRepository.AddTask(task);
+        await mediator.Publish(new TaskCreatedEvent()
+        {
+            Id = task.Id,
+            UserId = 0,
+        });
     }
 
     public void UpdateTask(Task task)
