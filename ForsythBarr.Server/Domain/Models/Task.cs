@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace ForsythBarr.Server.Domain;
+﻿namespace ForsythBarr.Server.Domain.Models;
 
 public enum TaskStatus
 {
