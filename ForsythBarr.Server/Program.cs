@@ -1,5 +1,7 @@
 using System.Reflection;
 using ForsythBarr.Server.Infrastructure;
+using ForsythBarr.Server.Infrastructure.Repositories;
+using ForsythBarr.Server.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +13,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>( options => options.UseSqlServer(builder.Configuration["Db:ConnectionString"]));
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+
+builder.Services.AddScoped<ITaskRepository, TaskRepository>();
+builder.Services.AddScoped<ITaskService, TaskService>();
 
 var app = builder.Build();
 
