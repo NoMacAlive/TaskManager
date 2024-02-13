@@ -9,6 +9,8 @@ D:\GitHubRepos\guangnya-technical-exercise\ForsythBarr.Server\bin\Debug\net8.0\F
 D:\GitHubRepos\guangnya-technical-exercise\ForsythBarr.Server\bin\Debug\net8.0\Azure.Core.dll
 D:\GitHubRepos\guangnya-technical-exercise\ForsythBarr.Server\bin\Debug\net8.0\Azure.Identity.dll
 D:\GitHubRepos\guangnya-technical-exercise\ForsythBarr.Server\bin\Debug\net8.0\Humanizer.dll
+D:\GitHubRepos\guangnya-technical-exercise\ForsythBarr.Server\bin\Debug\net8.0\MediatR.dll
+D:\GitHubRepos\guangnya-technical-exercise\ForsythBarr.Server\bin\Debug\net8.0\MediatR.Contracts.dll
 D:\GitHubRepos\guangnya-technical-exercise\ForsythBarr.Server\bin\Debug\net8.0\Microsoft.AspNetCore.SpaProxy.dll
 D:\GitHubRepos\guangnya-technical-exercise\ForsythBarr.Server\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
 D:\GitHubRepos\guangnya-technical-exercise\ForsythBarr.Server\bin\Debug\net8.0\Microsoft.CodeAnalysis.dll
@@ -138,5 +140,3 @@ D:\GitHubRepos\guangnya-technical-exercise\ForsythBarr.Server\obj\Debug\net8.0\r
 D:\GitHubRepos\guangnya-technical-exercise\ForsythBarr.Server\obj\Debug\net8.0\ForsythBarr.Server.pdb
 D:\GitHubRepos\guangnya-technical-exercise\ForsythBarr.Server\obj\Debug\net8.0\ForsythBarr.Server.genruntimeconfig.cache
 D:\GitHubRepos\guangnya-technical-exercise\ForsythBarr.Server\obj\Debug\net8.0\ref\ForsythBarr.Server.dll
-D:\GitHubRepos\guangnya-technical-exercise\ForsythBarr.Server\bin\Debug\net8.0\MediatR.dll
-D:\GitHubRepos\guangnya-technical-exercise\ForsythBarr.Server\bin\Debug\net8.0\MediatR.Contracts.dll
