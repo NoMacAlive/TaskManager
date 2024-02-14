@@ -22,7 +22,7 @@ public class TaskService(ITaskRepository taskRepository, IMediator mediator) : I
         return task;
     }
 
-    public async System.Threading.Tasks.Task AddTask(Task task)
+    public async System.Threading.Tasks.Task<int> AddTask(Task task)
     {
         taskRepository.AddTask(task);
         await mediator.Publish(new TaskCreatedEvent()
@@ -30,6 +30,8 @@ public class TaskService(ITaskRepository taskRepository, IMediator mediator) : I
             Id = task.Id,
             UserId = 0,
         });
+
+        return task.Id;
     }
 
     public void UpdateTask(Task task)
