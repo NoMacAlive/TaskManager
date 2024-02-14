@@ -32,6 +32,6 @@ public class TaskController(ITaskService taskService) : ControllerBase
             Status = request.Status
         };
         int newTaskId = await taskService.AddTask(newTask);
-        return CreatedAtRoute("GetAllTasks", new { id = newTaskId }, newTask);
+        return CreatedAtRoute("CreateNewTask", new { id = newTaskId }, newTask);
     }
 }
