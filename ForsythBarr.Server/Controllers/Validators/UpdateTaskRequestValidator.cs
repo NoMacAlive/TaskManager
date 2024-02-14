@@ -1,12 +1,14 @@
 ﻿using FluentValidation;
 using ForsythBarr.Server.Controllers.RequestModels;
+using TaskStatus = ForsythBarr.Server.Domain.Models.TaskStatus;
 
 namespace ForsythBarr.Server.Controllers.Validators;
 
-public class CreateNewTaskRequestValidator : AbstractValidator<CreateNewTaskRequest> 
+public class UpdateTaskRequestValidator : AbstractValidator<UpdateTaskRequest> 
 {
-    public CreateNewTaskRequestValidator()
+    public UpdateTaskRequestValidator()
     {
+        RuleFor(request => request.Id).NotNull();
         RuleFor(request => request.Title).NotNull();
         RuleFor(request => request.Description).NotNull();
         RuleFor(request => request.DueDate).NotNull();

@@ -37,4 +37,27 @@ public class TaskController(ITaskService taskService) : ControllerBase
         int newTaskId = await taskService.AddTask(newTask);
         return CreatedAtRoute("CreateNewTask", new { id = newTaskId }, newTask);
     }
+    
+    [HttpPut(Name = "UpdateTask")]
+    public async Task<IActionResult> Put([FromBody] UpdateTaskRequest request)
+    {
+        var validator = new UpdateTaskRequestValidator();
+        var validationResult = await validator.ValidateAsync(request);
+
+        if (!validationResult.IsValid)
+        {
+            return BadRequest(validationResult.Errors);
+        }
+        var newTask = new Task()
+        {
+            Id = request.Id,
+            Description = request.Description,
+            Title = request.Title,
+            DueDate = request.DueDate,
+            Priority = request.Priority,
+            Status = request.Status
+        };
+        await taskService.UpdateTask(newTask);
+        return NoContent();
+    }
 }
