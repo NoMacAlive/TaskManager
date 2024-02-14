@@ -22,7 +22,7 @@ public class TaskService(ITaskRepository taskRepository, IMediator mediator) : I
         return task;
     }
 
-    public async System.Threading.Tasks.Task<int> AddTask(Task task)
+    public async Task<int> AddTask(Task task)
     {
         taskRepository.AddTask(task);
         await mediator.Publish(new TaskCreatedEvent()
@@ -34,13 +34,47 @@ public class TaskService(ITaskRepository taskRepository, IMediator mediator) : I
         return task.Id;
     }
 
-    public void UpdateTask(Task task)
+    public async System.Threading.Tasks.Task UpdateTask(Task task)
     {
-        if (taskRepository.GetTaskById(task.Id) == null)
+        var existingTask = taskRepository.GetTaskById(task.Id);
+        if (existingTask == null)
         {
             throw new InvalidOperationException($"Task with ID {task.Id} not found.");
         }
         taskRepository.UpdateTask(task);
+
+        if (existingTask.Priority != task.Priority)
+        {
+            await mediator.Publish(new TaskPriorityUpdatedEvent()
+            {
+                Id = task.Id,
+                UserId = 0,
+                OldPriority = existingTask.Priority,
+                NewPriority = task.Priority
+            });
+        }
+        
+        if (existingTask.DueDate != task.DueDate)
+        {
+            await mediator.Publish(new TaskDueDateUpdatedEvent()
+            {
+                Id = task.Id,
+                UserId = 0,
+                OldDueDate = existingTask.DueDate,
+                NewDueDate = task.DueDate
+            });
+        }
+        
+        if (existingTask.Status != task.Status)
+        {
+            await mediator.Publish(new TaskStatusUpdatedEvent()
+            {
+                Id = task.Id,
+                UserId = 0,
+                NewStatus = existingTask.Status,
+                OldStatus = task.Status
+            });
+        }
     }
 
     public void DeleteTask(int id)

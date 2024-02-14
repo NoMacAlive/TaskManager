@@ -1,4 +1,5 @@
 ﻿using ForsythBarr.Server.Controllers.RequestModels;
+using ForsythBarr.Server.Controllers.Validators;
 using ForsythBarr.Server.Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 using Task = ForsythBarr.Server.Domain.Models.Task;
@@ -18,11 +19,13 @@ public class TaskController(ITaskService taskService) : ControllerBase
     [HttpPost(Name = "CreateNewTask")]
     public async Task<IActionResult> Post([FromBody] CreateNewTaskRequest request)
     {
-        if (request == null)
-        {
-            return BadRequest("Invalid task data.");
-        }
+        var validator = new CreateNewTaskRequestValidator();
+        var validationResult = await validator.ValidateAsync(request);
 
+        if (!validationResult.IsValid)
+        {
+            return BadRequest(validationResult.Errors);
+        }
         var newTask = new Task()
         {
             Description = request.Description,

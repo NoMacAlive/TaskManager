@@ -19,7 +19,7 @@ public class TaskRepository(ApplicationDbContext dbContext) : ITaskRepository
         dbContext.SaveChanges();
     }
 
-    public void UpdateTask(Domain.Models.Task task)
+    public void UpdateTask(Task task)
     {
         var existingTask = dbContext.Set<Task>().Find(task.Id);
         if (existingTask == null) return;
