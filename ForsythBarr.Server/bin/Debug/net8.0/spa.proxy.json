@@ -1,6 +1,6 @@
 {
 "SpaProxyServer": {
-"ServerUrl": "https://localhost:5173",
+"ServerUrl": "https://localhost:3000",
 "RedirectUrl": "",
 "LaunchCommand": "npm run dev",
 "WorkingDirectory": "D:\\GitHubRepos\\guangnya-technical-exercise\\ForsythBarr.Server\\..\\forsythbarr.client",
