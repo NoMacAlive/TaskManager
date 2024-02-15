@@ -5,6 +5,7 @@ import {useCallback, useEffect, useState} from 'react'
 import {Table, TableHeader, TableBody, TableColumn, TableRow, TableCell} from "@nextui-org/table";
 import {EditIcon} from "@/app/EditIcon";
 import {DeleteIcon} from "@/app/DeleteIcon";
+import TaskList from "@/components/TaskList";
 
 const Container = styled.div`
     padding: 16px;
@@ -36,13 +37,20 @@ interface Task {
 const Page = () => {
     const [tasks, setTasks] = useState<Task[]>([])
     const getTasks = useCallback(async () => {
-        const res = await fetch("http://localhost:5095/Task");
-
-        if (!res.ok) {
-            throw new Error('Failed to fetch data')
-        }
-
-        setTasks(await res.json())
+         fetch("http://localhost:5095/Task")
+            .then(response => response.json())
+            .then(data => {
+                const tasks: Task[] = data.map((task: any) => ({
+                    id: task.id,
+                    title: task.title,
+                    description: task.description,
+                    dueDate: new Date(task.dueDate),
+                    priority: task.priority,
+                    status: task.status
+                }));
+                setTasks(tasks)
+            })
+            .catch(error => console.error('Error fetching tasks:', error));
     }, []);
 
     useEffect(() => {
@@ -79,7 +87,7 @@ const Page = () => {
                         <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
                             <EditIcon/>
                         </span>
-                        
+
                         <span className="text-lg text-danger cursor-pointer active:opacity-50">
                             <DeleteIcon/>
                         </span>
@@ -100,26 +108,17 @@ const Page = () => {
     ];
 
     return (
-        <Container className={"content-center"}>
+        <Container className={"justify-center min-h-screen"}>
             <Title>Task Manager</Title>
-            <StyledTable className={"justify-center bg-slate-200"}>
-                <TableHeader columns={columns}>
-                    {(column) => (
-                        <TableColumn key={column.uid} align={column.uid === "actions" ? "center" : "start"}>
-                            {column.name}
-                        </TableColumn>
-                    )}
-                </TableHeader>
-                <TableBody items={tasks}>
-                    {(task) => (
-                        <TableRow key={task.id}>
-                            {(columnKey) => <TableCell className={"px-6"}>{renderCell(task, columnKey)}</TableCell>}
-                        </TableRow>
-                    )}
-                </TableBody>
-            </StyledTable>
+
+            <TaskList  tasks={tasks} onDelete={(id) => {
+                console.log(id)
+            }} onUpdate={(index, task) => {
+                console.log(index)
+                console.log(task)
+            }}></TaskList>
         </Container>
-        
+
     );
 
 };
