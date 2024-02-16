@@ -35,7 +35,7 @@ const Page = () => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const getTasks = useCallback(async () => {
         if (process.env.TASK_API) {
-            fetch("http://localhost:5095/Task")
+            fetch(process.env.TASK_API)
                 .then(response => response.json())
                 .then(data => {
                     const tasks: Task[] = data.map((task: any) => ({
