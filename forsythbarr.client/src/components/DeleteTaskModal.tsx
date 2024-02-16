@@ -1,8 +1,8 @@
-﻿import React, {useCallback} from "react";
-import {useDisclosure} from "@nextui-org/modal";
-import {Modal, ModalBody, ModalContent, ModalFooter, ModalHeader} from "@nextui-org/react";
-import {Button} from "@nextui-org/button";
-import {Are_You_Serious} from "next/dist/compiled/@next/font/dist/google";
+﻿import React, { useCallback } from "react";
+import { useDisclosure } from "@nextui-org/modal";
+import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from "@nextui-org/react";
+import { Button } from "@nextui-org/button";
+import { Are_You_Serious } from "next/dist/compiled/@next/font/dist/google";
 
 interface DeleteTaskModalProps {
     id: number;
@@ -12,13 +12,13 @@ interface DeleteTaskModalProps {
     onOpenChange: () => void;
 }
 
-export const DeleteTaskModal: React.FC<DeleteTaskModalProps> = ({id, title, isOpen, onOpen, onOpenChange}) => {
+export const DeleteTaskModal: React.FC<DeleteTaskModalProps> = ({ id, title, isOpen, onOpen, onOpenChange }) => {
     const onDelete = useCallback(async () => {
-        await fetch("http://localhost:5095/Task/"+id, {
+        await fetch("http://localhost:5095/Task/" + id, {
             method: "DELETE",
         })
-    }, []);
-    
+    }, [id]);
+
     return (
         <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
             <ModalContent>
@@ -34,7 +34,7 @@ export const DeleteTaskModal: React.FC<DeleteTaskModalProps> = ({id, title, isOp
                             <Button color="danger" variant="light" onPress={onClose}>
                                 Close
                             </Button>
-                            <Button color="primary" onPress={()=>{
+                            <Button color="primary" onPress={() => {
                                 onDelete()
                                 onClose()
                             }}>

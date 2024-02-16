@@ -79,6 +79,11 @@ public class TaskService(ITaskRepository taskRepository, IMediator mediator) : I
 
     public void DeleteTask(int id)
     {
+        var existingTask = taskRepository.GetTaskById(id);
+        if (existingTask == null)
+        {
+            throw new InvalidOperationException($"Task with ID {id} not found.");
+        }
         taskRepository.DeleteTask(id);
     }
 }

@@ -60,8 +60,8 @@ public class TaskController(ITaskService taskService) : ControllerBase
         await taskService.UpdateTask(newTask);
         return NoContent();
     }
-    
-    [HttpDelete(Name = "DeleteTask")]
+
+    [HttpDelete( "{id}", Name = "DeleteTask")]
     public IActionResult Delete([FromRoute] int id)
     {
         taskService.DeleteTask(id);
