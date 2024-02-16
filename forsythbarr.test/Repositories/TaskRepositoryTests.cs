@@ -35,7 +35,7 @@ namespace forsythbarr.test.Repositories
             _dbContext.DisposeAsync();
         }
 
-        [Test]
+        [Test, Order(1)]
         public void GetAllTasks_ShouldReturnAllTasks()
         {
             // Arrange
@@ -63,12 +63,12 @@ namespace forsythbarr.test.Repositories
 
             // Act
             var result = _taskRepository.GetAllTasks();
-            Console.WriteLine(_dbContext.Tasks);
+
             // Assert
             Assert.AreEqual(tasks.Count, result.Count());
         }
 
-        [Test]
+        [Test, Order(2)]
         public void GetTaskById_ExistingId_ShouldReturnTask()
         {
             // Arrange
@@ -92,7 +92,7 @@ namespace forsythbarr.test.Repositories
             Assert.AreEqual(task.Id, result.Id);
         }
         
-        [Test]
+        [Test,Order(3)]
         public void AddTask_ValidTask_ShouldAddToDatabase()
         {
             // Arrange
@@ -114,7 +114,7 @@ namespace forsythbarr.test.Repositories
             Assert.AreEqual(newTask.Title, addedTask.Title);
         }
 
-        [Test]
+        [Test, Order(4)]
         public void UpdateTask_ExistingTask_ShouldUpdateProperties()
         {
             // Arrange
@@ -150,7 +150,7 @@ namespace forsythbarr.test.Repositories
             Assert.AreEqual(existingTask.Status, updatedTask.Status);
         }
 
-        [Test]
+        [Test, Order(5)]
         public void DeleteTask_ExistingId_ShouldRemoveFromDatabase()
         {
             // Arrange

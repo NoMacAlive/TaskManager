@@ -1,6 +1,7 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
   &lt;Assembly Path="C:\Users\zhugu\.nuget\packages\mediatr\12.2.0\lib\net6.0\MediatR.dll" /&gt;&#xD;
+  &lt;Assembly Path="C:\Users\zhugu\.nuget\packages\fluentvalidation\11.9.0\lib\net8.0\FluentValidation.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=72b76c08_002Dd961_002D4192_002D9b93_002D6ed1d716aa06/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from UnitTest1.cs" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;Project Location="D:\GitHubRepos\guangnya-technical-exercise\forsythbarr.test" Presentation="&amp;lt;forsythbarr.test&amp;gt;" /&gt;&#xD;
