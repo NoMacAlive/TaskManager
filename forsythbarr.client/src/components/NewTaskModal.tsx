@@ -42,15 +42,15 @@ export const NewTaskModal: React.FC<NewTaskModalProps> = ({ isOpen, onOpen, onOp
         initialValues: initialValues,
         validationSchema: validationSchema,
         onSubmit: async (values) => {
-            await fetch("http://localhost:5095/Task", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(values),
-            })
-
-
+            if (process.env.TASK_API) {
+                await fetch("http://localhost:5095/Task", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(values),
+                })
+            }
         },
     });
     return (

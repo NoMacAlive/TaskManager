@@ -37,13 +37,15 @@ export const EditTaskModal: React.FC<EditTaskModalProps> = ({ isOpen, onOpen, on
         validationSchema: validationSchema,
         enableReinitialize: true,
         onSubmit: async (values) => {
-            await fetch("http://localhost:5095/Task", {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(values),
-            })
+            if (process.env.TASK_API) {
+                await fetch("http://localhost:5095/Task", {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(values),
+                })
+            }
         },
     });
 

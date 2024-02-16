@@ -34,20 +34,22 @@ const Page = () => {
     const [tasks, setTasks] = useState<Task[]>([])
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const getTasks = useCallback(async () => {
-        fetch("http://localhost:5095/Task")
-            .then(response => response.json())
-            .then(data => {
-                const tasks: Task[] = data.map((task: any) => ({
-                    id: task.id,
-                    title: task.title,
-                    description: task.description,
-                    dueDate: new Date(task.dueDate),
-                    priority: task.priority,
-                    status: task.status
-                }));
-                setTasks(tasks)
-            })
-            .catch(error => console.error('Error fetching tasks:', error));
+        if (process.env.TASK_API) {
+            fetch("http://localhost:5095/Task")
+                .then(response => response.json())
+                .then(data => {
+                    const tasks: Task[] = data.map((task: any) => ({
+                        id: task.id,
+                        title: task.title,
+                        description: task.description,
+                        dueDate: new Date(task.dueDate),
+                        priority: task.priority,
+                        status: task.status
+                    }));
+                    setTasks(tasks)
+                })
+                .catch(error => console.error('Error fetching tasks:', error));
+        }
     }, []);
 
     useEffect(() => {

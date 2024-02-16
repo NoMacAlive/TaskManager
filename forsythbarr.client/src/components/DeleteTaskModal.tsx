@@ -1,6 +1,6 @@
-﻿import React, { useCallback } from "react";
-import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from "@nextui-org/react";
-import { Button } from "@nextui-org/button";
+﻿import React, {useCallback} from "react";
+import {Modal, ModalBody, ModalContent, ModalFooter, ModalHeader} from "@nextui-org/react";
+import {Button} from "@nextui-org/button";
 
 interface DeleteTaskModalProps {
     id: number;
@@ -10,11 +10,14 @@ interface DeleteTaskModalProps {
     onOpenChange: () => void;
 }
 
-export const DeleteTaskModal: React.FC<DeleteTaskModalProps> = ({ id, title, isOpen, onOpen, onOpenChange }) => {
+export const DeleteTaskModal: React.FC<DeleteTaskModalProps> = ({id, title, isOpen, onOpen, onOpenChange}) => {
     const onDelete = useCallback(async () => {
-        await fetch("http://localhost:5095/Task/" + id, {
-            method: "DELETE",
-        })
+        if (process.env.TASK_API) {
+            await fetch(process.env.TASK_API + id, {
+                method: "DELETE",
+            })
+        }
+
     }, [id]);
 
     return (
