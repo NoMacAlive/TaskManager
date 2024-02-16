@@ -1,3 +1,26 @@
+## Running instructions
+This project runs under Nodejs 18, .NET 8.
+1. Setup a SQL database, I used a mssqlserver express.
+2. Create .env.local file in the client project and put TASK_API=http://localhost:5095/Task in there
+3. Create appsettings.Development.json and put
+```json
+   {
+   "Logging": {
+   "LogLevel": {
+   "Default": "Information",
+   "Microsoft.AspNetCore": "Warning"
+   }
+   },
+   "Db": {
+   "ConnectionString": "Persist Security Info=False;Data Source=localhost\\SQLEXPRESS;Initial Catalog=test;Integrated Security=true;TrustServerCertificate=true"
+   }
+   }
+   ```
+  in there or replace the connection string with your database
+4. run the project, both front-end and back-end
+5. start enjoying your task management
+
+
 ## Forysth Barr Take Home Exercise
 This exercise requires you to create a full-stack application using React, .NET 8, and a Database of your choice. 
 
