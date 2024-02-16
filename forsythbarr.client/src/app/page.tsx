@@ -9,7 +9,6 @@ import TaskList from "@/components/TaskList";
 import { Button } from '@nextui-org/button';
 import { Checkbox, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, NextUIProvider, useDisclosure } from '@nextui-org/react';
 import Link from 'next/link';
-import { NewTaskForm } from '@/components/NewTaskForm';
 import { NewTaskModal } from '@/components/NewTaskModal';
 
 const Container = styled.div`
@@ -62,56 +61,6 @@ const Page = () => {
     useEffect(() => {
         getTasks()
     }, []);
-
-    const renderCell = useCallback((task: Task, columnKey: React.Key) => {
-        const cellValue = task[columnKey as keyof Task];
-
-        switch (columnKey.toString()) {
-            case "title":
-                return (
-                    <div className="text-bold">{cellValue.toString()}</div>
-                );
-            case "description":
-                return (
-                    <div>{cellValue.toString()}</div>
-                );
-            case "dueDate":
-                return (
-                    <div>{new Date(cellValue).toLocaleString()}</div>
-                );
-            case "priority":
-                return (
-                    <div>{cellValue.toString()}</div>
-                );
-            case "status":
-                return (
-                    <div className="capitalize">{cellValue.toString()}</div>
-                );
-            case "actions":
-                return (
-                    <div className="relative flex items-center gap-2">
-                        <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                            <EditIcon />
-                        </span>
-
-                        <span className="text-lg text-danger cursor-pointer active:opacity-50">
-                            <DeleteIcon />
-                        </span>
-                    </div>
-                );
-            default:
-                return <div></div>;
-        }
-    }, []);
-
-    const columns = [
-        { uid: "title", name: "Title" },
-        { uid: "description", name: "Description" },
-        { uid: "dueDate", name: "Due Date" },
-        { uid: "priority", name: "Priority" },
-        { uid: "status", name: "Status" },
-        { uid: "actions", name: "Actions" }
-    ];
 
 
     return (
