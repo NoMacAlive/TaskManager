@@ -1,11 +1,16 @@
 'use client'
 
 import styled from 'styled-components'
-import {useCallback, useEffect, useState} from 'react'
-import {Table, TableHeader, TableBody, TableColumn, TableRow, TableCell} from "@nextui-org/table";
-import {EditIcon} from "@/app/EditIcon";
-import {DeleteIcon} from "@/app/DeleteIcon";
+import { useCallback, useEffect, useState } from 'react'
+import { Table, TableHeader, TableBody, TableColumn, TableRow, TableCell } from "@nextui-org/table";
+import { EditIcon } from "@/app/EditIcon";
+import { DeleteIcon } from "@/app/DeleteIcon";
 import TaskList from "@/components/TaskList";
+import { Button } from '@nextui-org/button';
+import { Checkbox, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, NextUIProvider, useDisclosure } from '@nextui-org/react';
+import Link from 'next/link';
+import { NewTaskForm } from '@/components/NewTaskForm';
+import { NewTaskModal } from '@/components/NewTaskModal';
 
 const Container = styled.div`
     padding: 16px;
@@ -36,8 +41,9 @@ interface Task {
 
 const Page = () => {
     const [tasks, setTasks] = useState<Task[]>([])
+    const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const getTasks = useCallback(async () => {
-         fetch("http://localhost:5095/Task")
+        fetch("http://localhost:5095/Task")
             .then(response => response.json())
             .then(data => {
                 const tasks: Task[] = data.map((task: any) => ({
@@ -85,11 +91,11 @@ const Page = () => {
                 return (
                     <div className="relative flex items-center gap-2">
                         <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                            <EditIcon/>
+                            <EditIcon />
                         </span>
 
                         <span className="text-lg text-danger cursor-pointer active:opacity-50">
-                            <DeleteIcon/>
+                            <DeleteIcon />
                         </span>
                     </div>
                 );
@@ -99,25 +105,30 @@ const Page = () => {
     }, []);
 
     const columns = [
-        {uid: "title", name: "Title"},
-        {uid: "description", name: "Description"},
-        {uid: "dueDate", name: "Due Date"},
-        {uid: "priority", name: "Priority"},
-        {uid: "status", name: "Status"},
-        {uid: "actions", name: "Actions"}
+        { uid: "title", name: "Title" },
+        { uid: "description", name: "Description" },
+        { uid: "dueDate", name: "Due Date" },
+        { uid: "priority", name: "Priority" },
+        { uid: "status", name: "Status" },
+        { uid: "actions", name: "Actions" }
     ];
 
-    return (
-        <Container className={"justify-center min-h-screen"}>
-            <Title>Task Manager</Title>
 
-            <TaskList  tasks={tasks} onDelete={(id) => {
-                console.log(id)
-            }} onUpdate={(index, task) => {
-                console.log(index)
-                console.log(task)
-            }}></TaskList>
-        </Container>
+    return (
+        <NextUIProvider>
+            <Container className={""}>
+                <Title>Task Manager</Title>
+                <NewTaskModal isOpen={isOpen} onOpen={onOpen} onOpenChange={onOpenChange}></NewTaskModal>
+                <Button onPress={onOpen}>New Task</Button>
+                <TaskList tasks={tasks} onDelete={(id) => {
+                    console.log(id)
+                }} onUpdate={(index, task) => {
+                    console.log(index)
+                    console.log(task)
+                }}></TaskList>
+            </Container>
+
+        </NextUIProvider>
 
     );
 
