@@ -16,10 +16,12 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.Get
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: MyAllowSpecificOrigins,
+    options.AddPolicy(name: "AllowAllOrigins",
         policy  =>
         {
-            policy.WithOrigins("http://localhost:3000");
+            policy.AllowAnyHeader();
+            policy.AllowAnyMethod();
+            policy.AllowAnyOrigin();
         });
 });
 
@@ -31,7 +33,7 @@ var app = builder.Build();
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
-app.UseCors(MyAllowSpecificOrigins);
+app.UseCors("AllowAllOrigins");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
