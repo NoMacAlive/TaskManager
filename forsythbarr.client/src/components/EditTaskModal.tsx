@@ -58,7 +58,7 @@ export const EditTaskModal: React.FC<EditTaskModalProps> = ({ isOpen, onOpen, on
             <ModalContent>
                 {(onClose) => (
                     <>
-                        <form onSubmit={() => {
+                        <form data-testid={"task-form"} onSubmit={() => {
                             formik.handleSubmit()
                             onClose()
                         }}>

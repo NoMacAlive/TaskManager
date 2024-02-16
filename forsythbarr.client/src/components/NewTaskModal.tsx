@@ -53,6 +53,7 @@ export const NewTaskModal: React.FC<NewTaskModalProps> = ({ isOpen, onOpen, onOp
             }
         },
     });
+
     return (
         <Modal
             isOpen={isOpen}
@@ -62,7 +63,7 @@ export const NewTaskModal: React.FC<NewTaskModalProps> = ({ isOpen, onOpen, onOp
             <ModalContent>
                 {(onClose) => (
                     <>
-                        <form onSubmit={() => {
+                        <form data-testid={"task-form"} onSubmit={() => {
                             formik.handleSubmit()
                             onClose()
                         }}>
