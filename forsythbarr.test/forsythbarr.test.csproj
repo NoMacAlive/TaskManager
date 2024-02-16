@@ -23,4 +23,8 @@
       <ProjectReference Include="..\ForsythBarr.Server\ForsythBarr.Server.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Handlers\" />
+    </ItemGroup>
+
 </Project>
