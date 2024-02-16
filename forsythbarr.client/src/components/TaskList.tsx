@@ -1,11 +1,12 @@
-﻿import React, { useCallback, useState } from 'react';
-import { Formik, Field, Form, FormikHelpers } from 'formik';
+﻿import React, {useCallback, useState} from 'react';
+import {Formik, Field, Form, FormikHelpers} from 'formik';
 import styled from "styled-components";
-import { EditIcon } from "@/app/EditIcon";
-import { DeleteIcon } from "@/app/DeleteIcon";
-import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from "@nextui-org/table";
-import { useDisclosure } from '@nextui-org/modal';
-import { EditTaskModal } from './EditTaskModal';
+import {EditIcon} from "@/app/EditIcon";
+import {DeleteIcon} from "@/app/DeleteIcon";
+import {Table, TableBody, TableCell, TableColumn, TableHeader, TableRow} from "@nextui-org/table";
+import {useDisclosure} from '@nextui-org/modal';
+import {EditTaskModal} from './EditTaskModal';
+import {DeleteTaskModal} from "@/components/DeleteTaskModal";
 
 interface Task {
     id: number;
@@ -27,9 +28,19 @@ interface TaskListProps {
 }
 
 
-const TaskList: React.FC<TaskListProps> = ({ tasks }) => {
-    const { isOpen, onOpen, onOpenChange } = useDisclosure();
+const TaskList: React.FC<TaskListProps> = ({tasks}) => {
+    const editModal = useDisclosure();
+    const deleteModal = useDisclosure();
     const [editingTask, setEditingTask] = useState<Task>({
+        id: 0,
+        title: "",
+        description: "",
+        dueDate: new Date(),
+        priority: 0,
+        status: 0
+    })
+
+    const [deleteTask, setDeleteTask] = useState<Task>({
         id: 0,
         title: "",
         description: "",
@@ -41,19 +52,26 @@ const TaskList: React.FC<TaskListProps> = ({ tasks }) => {
 
     const onEditPressed = useCallback(
         (task: Task) => {
-            setEditingTask(task)
-            onOpen();
+            setEditingTask(task);
+            editModal.onOpen();
         },
         [],
     )
 
+    const onDeletePressed = useCallback(
+        (task: Task) => {
+            setDeleteTask(task);
+            deleteModal.onOpen();
+        },
+        [],)
+
     const columns = [
-        { uid: "title", name: "Title" },
-        { uid: "description", name: "Description" },
-        { uid: "dueDate", name: "Due Date" },
-        { uid: "priority", name: "Priority" },
-        { uid: "status", name: "Status" },
-        { uid: "actions", name: "Actions" }
+        {uid: "title", name: "Title"},
+        {uid: "description", name: "Description"},
+        {uid: "dueDate", name: "Due Date"},
+        {uid: "priority", name: "Priority"},
+        {uid: "status", name: "Status"},
+        {uid: "actions", name: "Actions"}
     ];
 
     const renderCell = useCallback((task: Task, columnKey: React.Key) => {
@@ -84,11 +102,11 @@ const TaskList: React.FC<TaskListProps> = ({ tasks }) => {
                 return (
                     <div className="relative flex items-center gap-2">
                         <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                            <EditIcon onClick={() => onEditPressed(task)} />
+                            <EditIcon onClick={() => onEditPressed(task)}/>
                         </span>
 
                         <span className="text-lg text-danger cursor-pointer active:opacity-50">
-                            <DeleteIcon />
+                            <DeleteIcon onClick={() => onDeletePressed(task)}/>
                         </span>
                     </div>
                 );
@@ -99,16 +117,19 @@ const TaskList: React.FC<TaskListProps> = ({ tasks }) => {
 
     return (
         <div>
-            <EditTaskModal isOpen={isOpen} onOpen={onOpen} onOpenChange={onOpenChange} initialValues={{
-                id: editingTask.id,
-                title: editingTask.title,
-                description: editingTask.description,
-                dueDate: editingTask.dueDate.toISOString(),
-                priority: editingTask.priority,
-                status: editingTask.status,
-            }}>
+            <EditTaskModal isOpen={editModal.isOpen} onOpen={editModal.onOpen} onOpenChange={editModal.onOpenChange}
+                           initialValues={{
+                               id: editingTask.id,
+                               title: editingTask.title,
+                               description: editingTask.description,
+                               dueDate: editingTask.dueDate.toISOString(),
+                               priority: editingTask.priority,
+                               status: editingTask.status,
+                           }}/>
 
-            </EditTaskModal>
+            <DeleteTaskModal isOpen={deleteModal.isOpen} onOpen={deleteModal.onOpen}
+                             onOpenChange={deleteModal.onOpenChange} id={deleteTask.id} title={deleteTask?.title}/>
+
             <Table
                 className={"flex flex-col items-center border-solid border-2 border-indigo-600 justify-center bg-slate-200"}>
                 <TableHeader columns={columns}>
@@ -120,15 +141,14 @@ const TaskList: React.FC<TaskListProps> = ({ tasks }) => {
                 </TableHeader>
                 <TableBody items={tasks}>
                     {tasks.map((task, index) => {
-                        return (
-                            <TableRow key={task.id}>
-                                {(columnKey) => <TableCell>{renderCell(task, columnKey)}</TableCell>}
-                            </TableRow>
-                        )
-                    }
+                            return (
+                                <TableRow key={task.id}>
+                                    {(columnKey) => <TableCell>{renderCell(task, columnKey)}</TableCell>}
+                                </TableRow>
+                            )
+                        }
                     )}
                 </TableBody>
-
             </Table>
         </div>
 
