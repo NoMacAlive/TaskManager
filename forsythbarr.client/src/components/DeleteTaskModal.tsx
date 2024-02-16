@@ -1,8 +1,6 @@
 ﻿import React, { useCallback } from "react";
-import { useDisclosure } from "@nextui-org/modal";
 import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from "@nextui-org/react";
 import { Button } from "@nextui-org/button";
-import { Are_You_Serious } from "next/dist/compiled/@next/font/dist/google";
 
 interface DeleteTaskModalProps {
     id: number;

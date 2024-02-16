@@ -1,12 +1,10 @@
 ﻿import React, {useCallback, useState} from 'react';
-import {Formik, Field, Form, FormikHelpers} from 'formik';
-import styled from "styled-components";
-import {EditIcon} from "@/app/EditIcon";
-import {DeleteIcon} from "@/app/DeleteIcon";
 import {Table, TableBody, TableCell, TableColumn, TableHeader, TableRow} from "@nextui-org/table";
 import {useDisclosure} from '@nextui-org/modal';
 import {EditTaskModal} from './EditTaskModal';
 import {DeleteTaskModal} from "@/components/DeleteTaskModal";
+import {EditIcon} from "@/Icons/EditIcon";
+import {DeleteIcon} from "@/Icons/DeleteIcon";
 
 interface Task {
     id: number;
@@ -26,7 +24,6 @@ enum Status {
 interface TaskListProps {
     tasks: Task[];
 }
-
 
 const TaskList: React.FC<TaskListProps> = ({tasks}) => {
     const editModal = useDisclosure();
@@ -131,7 +128,7 @@ const TaskList: React.FC<TaskListProps> = ({tasks}) => {
                              onOpenChange={deleteModal.onOpenChange} id={deleteTask.id} title={deleteTask?.title}/>
 
             <Table
-                className={"flex flex-col items-center border-solid border-2 border-indigo-600 justify-center bg-slate-200"}>
+                className={"flex flex-col items-center justify-center bg-slate-200"}>
                 <TableHeader columns={columns}>
                     {(column) => (
                         <TableColumn key={column.uid} align={column.uid === "actions" ? "center" : "start"}>

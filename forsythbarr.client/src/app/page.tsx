@@ -2,20 +2,15 @@
 
 import styled from 'styled-components'
 import { useCallback, useEffect, useState } from 'react'
-import { Table, TableHeader, TableBody, TableColumn, TableRow, TableCell } from "@nextui-org/table";
-import { EditIcon } from "@/app/EditIcon";
-import { DeleteIcon } from "@/app/DeleteIcon";
+import { Table } from "@nextui-org/table";
 import TaskList from "@/components/TaskList";
 import { Button } from '@nextui-org/button';
-import { Checkbox, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, NextUIProvider, useDisclosure } from '@nextui-org/react';
-import Link from 'next/link';
+import { NextUIProvider, useDisclosure } from '@nextui-org/react';
 import { NewTaskModal } from '@/components/NewTaskModal';
 
 const Container = styled.div`
     padding: 16px;
-    border: 1px solid #ddd;
     border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `
 
 const Title = styled.h1`
@@ -24,9 +19,6 @@ const Title = styled.h1`
     color: #333;
     text-align: center;
     margin-bottom: 1rem;
-`
-
-const StyledTable = styled(Table)`
 `
 
 interface Task {
@@ -65,13 +57,12 @@ const Page = () => {
 
     return (
         <NextUIProvider>
-            <Container className={""}>
-                <Title>Task Manager</Title>
+            <Container>
+                <Title>Task Manager by Guangya Zhu</Title>
                 <NewTaskModal isOpen={isOpen} onOpen={onOpen} onOpenChange={onOpenChange}></NewTaskModal>
-                <Button onPress={onOpen}>New Task</Button>
+                <Button color={"primary"} onPress={onOpen}>New Task</Button>
                 <TaskList tasks={tasks}></TaskList>
             </Container>
-
         </NextUIProvider>
 
     );
