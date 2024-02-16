@@ -120,12 +120,7 @@ const Page = () => {
                 <Title>Task Manager</Title>
                 <NewTaskModal isOpen={isOpen} onOpen={onOpen} onOpenChange={onOpenChange}></NewTaskModal>
                 <Button onPress={onOpen}>New Task</Button>
-                <TaskList tasks={tasks} onDelete={(id) => {
-                    console.log(id)
-                }} onUpdate={(index, task) => {
-                    console.log(index)
-                    console.log(task)
-                }}></TaskList>
+                <TaskList tasks={tasks}></TaskList>
             </Container>
 
         </NextUIProvider>

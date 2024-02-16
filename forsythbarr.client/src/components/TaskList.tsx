@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { EditIcon } from "@/app/EditIcon";
 import { DeleteIcon } from "@/app/DeleteIcon";
 import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from "@nextui-org/table";
+import { useDisclosure } from '@nextui-org/modal';
+import { EditTaskModal } from './EditTaskModal';
 
 interface Task {
     id: number;
@@ -22,22 +24,28 @@ enum Status {
 
 interface TaskListProps {
     tasks: Task[];
-    onDelete: (id: number) => void;
-    onUpdate: (index: number, task: Task) => void;
 }
 
 
-const TaskList: React.FC<TaskListProps> = ({ tasks, onDelete, onUpdate }) => {
-    console.log(tasks)
-    const [editIndex, setEditIndex] = useState<number | null>(null);
+const TaskList: React.FC<TaskListProps> = ({ tasks }) => {
+    const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    const [editingTask, setEditingTask] = useState<Task>({
+        id: 0,
+        title: "",
+        description: "",
+        dueDate: new Date(),
+        priority: 0,
+        status: 0
+    })
 
-    const handleEdit = (index: number) => {
-        setEditIndex(index);
-    };
 
-    const handleCancelEdit = () => {
-        setEditIndex(null);
-    };
+    const onEditPressed = useCallback(
+        (task: Task) => {
+            setEditingTask(task)
+            onOpen();
+        },
+        [],
+    )
 
     const columns = [
         { uid: "title", name: "Title" },
@@ -76,7 +84,7 @@ const TaskList: React.FC<TaskListProps> = ({ tasks, onDelete, onUpdate }) => {
                 return (
                     <div className="relative flex items-center gap-2">
                         <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                            <EditIcon />
+                            <EditIcon onClick={() => onEditPressed(task)} />
                         </span>
 
                         <span className="text-lg text-danger cursor-pointer active:opacity-50">
@@ -89,54 +97,41 @@ const TaskList: React.FC<TaskListProps> = ({ tasks, onDelete, onUpdate }) => {
         }
     }, []);
 
-    const renderForm = (task: Task, index: number) =>
-    (
-        <Formik className={"flex flex-row"}
-            initialValues={task}
-            onSubmit={(values: Task, actions: FormikHelpers<Task>) => {
-                onUpdate(index, values);
-                setEditIndex(null);
-                actions.setSubmitting(false);
-            }}
-        >
-            {({ handleSubmit }) => (
-                <Form className={"flex flex-row"}>
-                    <Field type="text" name={`title`} />
-                    <Field type="text" name={`description`} />
-                    <Field type="date" name={`dueDate`} />
-                    <Field type="number" name={`priority`} />
-                    <Field type="number" name={`status`} />
-                    <button type="submit">Submit</button>
-                    <button type="button" onClick={handleCancelEdit}>
-                        Cancel
-                    </button>
-                </Form>
-            )}
-        </Formik>
-    )
-
     return (
-        <Table
-            className={"flex flex-col items-center border-solid border-2 border-indigo-600 justify-center bg-slate-200"}>
-            <TableHeader columns={columns}>
-                {(column) => (
-                    <TableColumn key={column.uid} align={column.uid === "actions" ? "center" : "start"}>
-                        {column.name}
-                    </TableColumn>
-                )}
-            </TableHeader>
-            <TableBody items={tasks}>
-                {tasks.map((task, index) => {
-                    return (
-                        <TableRow key={task.id}>
-                            {(columnKey) => <TableCell>{renderCell(task, columnKey)}</TableCell>}
-                        </TableRow>
-                    )
-                }
-                )}
-            </TableBody>
+        <div>
+            <EditTaskModal isOpen={isOpen} onOpen={onOpen} onOpenChange={onOpenChange} initialValues={{
+                id: editingTask.id,
+                title: editingTask.title,
+                description: editingTask.description,
+                dueDate: editingTask.dueDate.toISOString(),
+                priority: editingTask.priority,
+                status: editingTask.status,
+            }}>
 
-        </Table>
+            </EditTaskModal>
+            <Table
+                className={"flex flex-col items-center border-solid border-2 border-indigo-600 justify-center bg-slate-200"}>
+                <TableHeader columns={columns}>
+                    {(column) => (
+                        <TableColumn key={column.uid} align={column.uid === "actions" ? "center" : "start"}>
+                            {column.name}
+                        </TableColumn>
+                    )}
+                </TableHeader>
+                <TableBody items={tasks}>
+                    {tasks.map((task, index) => {
+                        return (
+                            <TableRow key={task.id}>
+                                {(columnKey) => <TableCell>{renderCell(task, columnKey)}</TableCell>}
+                            </TableRow>
+                        )
+                    }
+                    )}
+                </TableBody>
+
+            </Table>
+        </div>
+
     );
 };
 
