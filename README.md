@@ -21,7 +21,7 @@ This project runs under Nodejs 18, .NET 8.
 5. start enjoying your task management
 
 
-## Forysth Barr Take Home Exercise
+## Task Manager Exercise
 This exercise requires you to create a full-stack application using React, .NET 8, and a Database of your choice. 
 
 When completing this exercise, please make sure everything is production quality and make sure to follow best software development practice to the best of your ability.
