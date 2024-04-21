@@ -10,13 +10,13 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("ForsythBarr.Server")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("forsythbarr.test")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+673f58a88d193a090ad7db2318123ddbe4c175b1")]
-[assembly: System.Reflection.AssemblyProductAttribute("ForsythBarr.Server")]
-[assembly: System.Reflection.AssemblyTitleAttribute("ForsythBarr.Server")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5c226db38acf966c621ed661742b2f8b88ccaec2")]
+[assembly: System.Reflection.AssemblyProductAttribute("forsythbarr.test")]
+[assembly: System.Reflection.AssemblyTitleAttribute("forsythbarr.test")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
-// 由 MSBuild WriteCodeFragment 类生成。
+// �?MSBuild WriteCodeFragment 类生成�?
 
